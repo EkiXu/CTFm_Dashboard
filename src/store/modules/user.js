@@ -52,7 +52,10 @@ export const user = {
         let tokens = {access:res.data.access,refresh:res.data.refresh}
         commit('updateTokens',tokens)
         const decoded = jwt_decode(res.data.access)
-        let userInfo = {nickname:decoded.nickname,username:decoded.username,id:decoded.id}
+        if(!decoded.is_staff){
+          throw Error("Forrbidden")
+        }
+        let userInfo = {nickname:decoded.nickname,username:decoded.username,id:decoded.id,is_hidden:decoded.is_hidden,is_staff:decoded.is_staff}
         commit('setUserInfo',userInfo)
         const redirect = router.history.current.query.redirect
         if (redirect) {
