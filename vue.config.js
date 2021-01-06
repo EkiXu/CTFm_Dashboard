@@ -10,7 +10,7 @@ module.exports = {
   transpileDependencies: [
     'vuetify'
   ],
-  publicPath: '/',
+  publicPath: '/admin/',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: false,
