@@ -2,14 +2,14 @@ import service from '@/utils/request'
 
 export const getUserListAPI = () => {
     return service({
-      url: '/user/full/',
+      url: '/admin/user/',
       method: 'get',
     })
   }
 
 export const addUserAPI = (data) => {
   return service({
-    url: '/user/',
+    url: '/admin/user/',
     method: 'post',
     data:data,
   })
@@ -17,14 +17,14 @@ export const addUserAPI = (data) => {
 
 export const getUserByIDAPI = (id) => {
   return service({
-    url: '/user/'+id+'/full/',
+    url: '/admin/user/'+id+'/',
     method: 'get',
   })
 }
 
 export const updateUserByIDAPI = (id,data) => {
   return service({
-    url: '/user/'+id+'/full/',
+    url: '/admin/user/'+id+'/',
     method: 'put',
     data:data
   })

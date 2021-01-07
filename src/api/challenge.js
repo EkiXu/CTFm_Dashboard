@@ -2,7 +2,7 @@ import service from '@/utils/request'
 
 export const getChallengeListAPI = () => {
   return service({
-    url: '/challenge/full',
+    url: '/admin/challenge/',
     method: 'get',
   })
 }
@@ -10,14 +10,14 @@ export const getChallengeListAPI = () => {
 
 export const getChallengeByIDAPI = (id) => {
   return service({
-    url: '/challenge/'+id+'/full/',
+    url: '/admin/challenge/'+id+'/',
     method: 'get',
   })
 }
 
 export const addChallengeAPI = (data) => {
   return service({
-    url: '/challenge/',
+    url: '/admin/challenge/',
     method: 'post',
     data:data
   })
@@ -25,7 +25,7 @@ export const addChallengeAPI = (data) => {
 
 export const updateChallengeByIDAPI = (id,data) => {
   return service({
-    url: '/challenge/'+id+'/',
+    url: '/admin/challenge/'+id+'/',
     method: 'put',
     data:data
   })
