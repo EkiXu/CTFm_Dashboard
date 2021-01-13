@@ -5,7 +5,7 @@ import service from '@/utils/request'
 // @Router /contest/ [get]
 export const getContestAPI = () => {
   return service({
-    url: '/contest/',
+    url: '/admin/contest/',
     method: 'get',
   })
 }
@@ -16,7 +16,7 @@ export const getContestAPI = () => {
 // @Router /contest/ [put]
 export const updateContestAPI = (data) => {
   return service({
-    url: '/contest/',
+    url: '/admin/contest/',
     method: 'put',
     data:data
   })
