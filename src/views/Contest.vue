@@ -49,14 +49,14 @@
                         readonly
                         v-bind="attrs"
                         v-on="on"
-                      ></v-text-field>
+                      />
                     </template>
                     <v-date-picker
                       v-model="dates"
                       scrollable
                       range
                     >
-                      <v-spacer></v-spacer>
+                      <v-spacer />
                       <v-btn
                         text
                         color="primary"
@@ -92,14 +92,14 @@
                         readonly
                         v-bind="attrs"
                         v-on="on"
-                      ></v-text-field>
+                      />
                     </template>
                     <v-time-picker
                       v-if="startTimeModal"
                       v-model="startTime"
                       full-width
                     >
-                      <v-spacer></v-spacer>
+                      <v-spacer />
                       <v-btn
                         text
                         color="primary"
@@ -135,14 +135,14 @@
                         readonly
                         v-bind="attrs"
                         v-on="on"
-                      ></v-text-field>
+                      />
                     </template>
                     <v-time-picker
                       v-if="endTimeModal"
                       v-model="endTime"
                       full-width
                     >
-                      <v-spacer></v-spacer>
+                      <v-spacer />
                       <v-btn
                         text
                         color="primary"
@@ -159,6 +159,17 @@
                       </v-btn>
                     </v-time-picker>
                   </v-dialog>
+                </v-col>
+                <v-col
+                  cols="12"
+                >
+                  <h2 style="padding-bottom:10px">
+                    Content
+                  </h2>
+                  <Markdown
+                    v-model="contest.description"
+                    :height="360"
+                  />
                 </v-col>
                 <v-col
                   cols="12"
@@ -183,11 +194,13 @@
 
 <script>
 import 'moment'
+import Markdown from 'vue-meditor'
 import BaseCard from '@/components/BaseCard.vue'
 import { getContestAPI,updateContestAPI } from '@/api/contest'
 export default {
   components: {
-    BaseCard
+    BaseCard,
+    Markdown
   },
   data(){
     return {
@@ -201,6 +214,7 @@ export default {
         name:'',
         start_time:'',
         end_time:'',
+        description:'',
       }
     }
   },
