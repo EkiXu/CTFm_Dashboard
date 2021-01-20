@@ -20,7 +20,7 @@
           <v-data-table
             :headers="headers"
             :items="category"
-            sort-by="points"
+            sort-by="id"
             class="elevation-1"
             style="box-shadow:none !important"
           >

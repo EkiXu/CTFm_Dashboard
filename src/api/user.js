@@ -29,3 +29,10 @@ export const updateUserByIDAPI = (id,data) => {
     data:data
   })
 }
+
+export const deleteUserByIDAPI = (id) => {
+  return service({
+    url: '/admin/user/'+id+'/',
+    method: 'delete',
+  })
+}

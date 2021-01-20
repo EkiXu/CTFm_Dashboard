@@ -21,10 +21,9 @@ export const addNotificationAPI = (data) => {
     data:data
   })
 }
-export const deleteNotificationByIDAPI = (id,data) => {
+export const deleteNotificationByIDAPI = (id) => {
   return service({
     url: '/admin/notification/'+id+'/',
     method: 'delete',
-    data:data
   })
 }

@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
     <NavMenu />
-    <v-main>
+    <v-main class="main">
       <router-view />
     </v-main>
   </v-app>
@@ -27,16 +27,20 @@ export default {
 html {
   width: 100%;
   height: 100%;
+  overflow: auto;
 }
 body{
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
+.main{
+  height: calc(100vh - 64px);
+  overflow: auto;
+}
 #app{
   width: 100%;
   height: 100%;
-  overflow: auto;
 }
 ::-webkit-scrollbar {
   -webkit-appearance: none;
