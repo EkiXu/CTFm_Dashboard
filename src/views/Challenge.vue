@@ -149,6 +149,78 @@
                               :height="260"
                             />
                           </v-col>
+                          <v-col
+                            cols="8"
+                            sm="5"
+                            md="4"
+                          >
+                            <v-select
+                              :items="types"
+                              v-model="editedChallenge.have_dynamic_container"
+                              item-text="name"
+                              item-value="value"
+                              label="Type"
+                            />
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="7"
+                            md="8"
+                          >
+                            <v-text-field
+                              v-model="editedChallenge.attachment_url"
+                              label="Attachment"
+                            />
+                          </v-col>
+                          <template v-if="editedChallenge.have_dynamic_container" >
+                            <v-col
+                              cols="12"
+                              sm="6"
+                             >
+                              <v-text-field
+                                v-model="editedChallenge.image"
+                                label="Image"
+                              />
+                            </v-col>
+                            <v-col
+                              cols="6"
+                              sm="3"
+                             >
+                              <v-select
+                                :items="protocols"
+                                v-model="editedChallenge.protocol"
+                                item-text="name"
+                                item-value="value"
+                                label="Protocol"
+                              />
+                            </v-col>
+                            <v-col
+                              cols="6"
+                              sm="3"
+                             >
+                              <v-text-field
+                                v-model="editedChallenge.port"
+                                label="Port"
+                                :rules="rules.portRules"
+                              />
+                            </v-col>
+                            <v-col
+                              cols="6"
+                             >
+                              <v-text-field
+                                v-model="editedChallenge.memory_limit"
+                                label="Memory Limit"
+                              />
+                            </v-col>
+                            <v-col
+                              cols="6"
+                             >
+                              <v-text-field
+                                v-model="editedChallenge.cpu_limit"
+                                label="CPU Limit"
+                              />
+                            </v-col>
+                          </template>
                           <v-col cols="12">
                             <v-switch
                               v-model="editedChallenge.is_hidden"
@@ -260,6 +332,8 @@ export default {
       minimum_points:0,
       decay:0,
       is_hidden: true,
+      have_dynamic_container:false,
+      attachment_url:'',
     },
     defaultChallenge: {
       id:0,
@@ -272,14 +346,40 @@ export default {
       minimum_points:0,
       decay:0,
       is_hidden: true,
+      have_dynamic_container:false,
+      attachment_url:'',
     },
-    categories:[],      
+    categories:[],
+    types:[
+      {
+        name:"Static URL",
+        value:false
+      },
+      {
+        name:"Daynamic Container",
+        value:true
+      }
+    ],
+    protocols:[
+      {
+        name:"HTTP",
+        value:'http'
+      },
+      {
+        name:"TCP",
+        value:'tcp'
+      }
+    ],
     rules: {
         nameRules: [
           v => !!v || 'Challenge Title is required',
         ],
         pointsRules: [v => !!v || 'Points is required',
          v => /^[0-9]*$/.test(v) || 'Points must be valid'],
+        portRules: [v => !!v || 'Ports is required',
+         v => /^[0-9]*$/.test(v) || 'Ports must be valid',
+         v => 0 < v && v < 66536 || 'Ports must between 1~66535',
+        ],
         categoryRules: [v => !!v || 'Category is required'],
         contentnRules: [v => !!v || 'Content is required'],
         flagRules: [v => !!v || 'Flag is required',
