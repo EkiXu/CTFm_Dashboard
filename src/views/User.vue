@@ -102,16 +102,22 @@
                               :rules="rules.passwordRules"
                             />
                           </v-col>
-                          <v-col cols="6">
+                          <v-col cols="4">
                             <v-switch
                               v-model="editedUser.is_staff"
                               label="Admin Account"
                             />
                           </v-col>
-                          <v-col cols="6">
+                          <v-col cols="4">
                             <v-switch
                               v-model="editedUser.is_hidden"
                               label="Hidden Account"
+                            />
+                          </v-col>
+                          <v-col cols="4">
+                            <v-switch
+                              v-model="editedUser.is_verified"
+                              label="Verified Account"
                             />
                           </v-col>
                         </v-row>
@@ -138,6 +144,12 @@
                   </v-card>
                 </v-dialog>
               </v-toolbar>
+            </template>
+            <template v-slot:item.is_verified="{ item }">
+              <v-simple-checkbox
+                v-model="item.is_verified"
+                disabled
+              />
             </template>
             <template v-slot:item.is_staff="{ item }">
               <v-simple-checkbox
@@ -206,6 +218,7 @@ export default {
       { text: 'Solved', value: 'solved_amount' },
       { text: 'Points', value: 'points' },
       { text: 'IsAdmin', value: 'is_staff' },
+      { text: 'IsVerified', value:'is_verified'},
       { text: 'IsHidden', value: 'is_hidden' },
       { text: 'Actions', value: 'actions', sortable: false }
     ],
@@ -221,6 +234,7 @@ export default {
       points: 0,
       is_staff: false,
       is_hidden: true,
+      is_verified:false,
     },
     defaultUser: {
       id:0,

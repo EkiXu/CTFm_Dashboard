@@ -6,7 +6,7 @@ import service from '@/utils/request'
 // @Router /auth/obtainToken/ [post]
 export const obtainTokenAPI = (data) => {
   return service({
-    url: '/auth/obtainToken/',
+    url: '/auth/obtain_token/',
     method: 'post',
     data: data
   })
@@ -18,7 +18,7 @@ export const obtainTokenAPI = (data) => {
 // @Router /auth/refreshToken/ [post]
 export const refreshTokenAPI = (data) => {
   return service({
-    url: '/auth/refreshToken/',
+    url: '/auth/refresh_token/',
     method: 'post',
     data: data
   })
