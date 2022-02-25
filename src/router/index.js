@@ -69,6 +69,22 @@ const routes = [
     }
   },
   {
+    path: '/team',
+    component: () => import('@/views/Team.vue'),
+    name: 'team',
+    meta: {
+      title: 'Team',
+    }
+  },
+  {
+    path: '/frp',
+    component: () => import('@/views/Frp.vue'),
+    name: 'frp',
+    meta: {
+      title: 'Frp',
+    }
+  },
+  {
     path: '/error/404',
     name: '404 NOT FOUND',
     component: () => import('@/views/error/Error404.vue'),

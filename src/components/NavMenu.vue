@@ -64,58 +64,16 @@
       </router-link>
       <v-list>
         <v-list-item
+          v-for="action in menu"
+          :key="action.name"
           link
-          to="/contest"
+          :to="action.href"
         >
           <v-list-item-action>
-            <v-icon>mdi-sword-cross</v-icon>
+            <v-icon>{{action.icon}}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Contest</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item
-          link
-          to="/category"
-        >
-          <v-list-item-action>
-            <v-icon>mdi-tag</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Category</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item
-          link
-          to="/challenge"
-        >
-          <v-list-item-action>
-            <v-icon>mdi-flag</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Challenges</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item
-          link
-          to="/notification"
-        >
-          <v-list-item-action>
-            <v-icon>mdi-bell</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Notifications</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item
-          link
-          to="/user"
-        >
-          <v-list-item-action>
-            <v-icon>mdi-account-supervisor</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>User</v-list-item-title>
+            <v-list-item-title>{{action.name}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -134,6 +92,43 @@ export default {
     drawer: null,
     dropdown_menu: ['Profile', 'Logout'],
     isLoggedIn: false,
+    menu:[
+      {
+        name:"Contest",
+        href:"/contest",
+        icon:"mdi-sword-cross"
+      },
+      {
+        name:"Category",
+        href:"/category",
+        icon:"mdi-tag"
+      },
+      {
+        name:"Challenge",
+        href:"/challenge",
+        icon:"mdi-flag"
+      },
+      {
+        name:"Notifications",
+        href:"/notification",
+        icon:"mdi-bell",
+      },
+      {
+        name:"User",
+        href:"/user",
+        icon:"mdi-account-supervisor",
+      },
+      {
+        name:"Team",
+        href:"/team",
+        icon:"mdi-account-group",
+      },
+      {
+        name:"Frp",
+        href:"/frp",
+        icon:"mdi-access-point-network",
+      }
+    ]
   }),
   computed: {
     ...mapGetters('user', ['accessToken','userInfo'])
