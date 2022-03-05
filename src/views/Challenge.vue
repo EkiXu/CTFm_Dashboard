@@ -156,7 +156,7 @@
                           >
                             <v-select
                               :items="types"
-                              v-model="editedChallenge.have_dynamic_container"
+                              v-model="editedChallenge.has_dynamic_container"
                               item-text="name"
                               item-value="value"
                               label="Type"
@@ -172,7 +172,7 @@
                               label="Attachment"
                             />
                           </v-col>
-                          <template v-if="editedChallenge.have_dynamic_container" >
+                          <template v-if="editedChallenge.has_dynamic_container" >
                             <v-col
                               cols="12"
                               sm="6"
@@ -334,6 +334,8 @@ export default {
       is_hidden: true,
       have_dynamic_container:false,
       attachment_url:'',
+      memory_limit:"128m",
+      cpu_limit:0.5,
     },
     defaultChallenge: {
       id:0,
@@ -346,7 +348,7 @@ export default {
       minimum_points:0,
       decay:0,
       is_hidden: true,
-      have_dynamic_container:false,
+      has_dynamic_container:false,
       attachment_url:'',
     },
     categories:[],
@@ -362,13 +364,13 @@ export default {
     ],
     protocols:[
       {
-        name:"HTTP",
-        value:'http'
+        name:"TCP",
+        value:'1'
       },
       {
-        name:"TCP",
-        value:'tcp'
-      }
+        name:"HTTP",
+        value:'2'
+      },
     ],
     rules: {
         nameRules: [

@@ -109,7 +109,7 @@ export default {
         icon:"mdi-flag"
       },
       {
-        name:"Notifications",
+        name:"Notification",
         href:"/notification",
         icon:"mdi-bell",
       },
@@ -124,9 +124,14 @@ export default {
         icon:"mdi-account-group",
       },
       {
-        name:"Frp",
-        href:"/frp",
-        icon:"mdi-access-point-network",
+        name:"Container",
+        href:"/container",
+        icon:"mdi-animation",
+      },
+      {
+        name:"Whale",
+        href:"/whale",
+        icon:"mdi-docker",
       }
     ]
   }),
