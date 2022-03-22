@@ -199,7 +199,7 @@
                               sm="3"
                              >
                               <v-text-field
-                                v-model="editedChallenge.port"
+                                v-model="editedChallenge.redirect_port"
                                 label="Port"
                                 :rules="rules.portRules"
                               />
