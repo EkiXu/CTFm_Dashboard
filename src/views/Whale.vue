@@ -79,7 +79,7 @@
                 </v-col>
                 <v-col cols="12">
                   <v-text-field
-                    v-model="whaleConfig.docker_dns_setting"
+                    v-model="whaleConfig.docker_dns"
                     label="Docker Dns Setting"
                   />
                 </v-col>
@@ -144,7 +144,7 @@ export default {
       frp_config_template: "",
       docker_auto_connect_containers: "",
       docker_auto_connect_network: "",
-      docker_dns_setting: "",
+      docker_dns: "",
       docker_swarm_nodes: "",
       docker_multi_container_network_subnet: "",
       docker_multi_container_network_subnet_new_prefix: "",

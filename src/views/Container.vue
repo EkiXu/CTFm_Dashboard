@@ -12,9 +12,9 @@
       >
         <BaseCard color="#03a9be">
           <template v-slot:heading>
-            <div class="display-2 font-weight-light">
+            <!--<div class="display-2 font-weight-light">
               Edit Container
-            </div>
+            </div>-->
           </template>
 
           <v-data-table
