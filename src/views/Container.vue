@@ -12,9 +12,9 @@
       >
         <BaseCard color="#03a9be">
           <template v-slot:heading>
-            <!--<div class="display-2 font-weight-light">
+            <div class="display-2 font-weight-light">
               Edit Container
-            </div>-->
+            </div>
           </template>
 
           <v-data-table
@@ -33,7 +33,7 @@
                   vertical
                 />
                 <v-spacer />
-                <v-dialog
+                <!-- <v-dialog
                   v-model="dialog"
                   hide-overlay
                   persistent
@@ -114,7 +114,7 @@
                       </v-btn>
                     </v-card-actions>
                   </v-card>
-                </v-dialog>
+                </v-dialog> -->
               </v-toolbar>
             </template>
             <template v-slot:item.type="{ item }">

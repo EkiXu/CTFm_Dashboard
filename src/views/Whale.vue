@@ -132,7 +132,7 @@ export default {
   data: () => ({
     whaleConfig: {
       docker_api_url: "",
-      frp_api_ip: "",
+      frp_api_host: "",
       frp_api_port: 0,
       frp_http_domain_suffix: "",
       frp_http_port: 0,
