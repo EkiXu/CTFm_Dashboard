@@ -238,8 +238,10 @@ export default {
 
     async deleteItem (item) {
       const index = this.category.indexOf(item)
-      confirm('Are you sure you want to delete this Category?') && this.category.splice(index, 1)
-      const res = await deleteCategoryByIDAPI(item.id)
+      if(confirm('Are you sure you want to delete this Category?')) {
+          this.category.splice(index, 1)
+          const res = await deleteCategoryByIDAPI(item.id)
+      } 
     },
 
     close () {

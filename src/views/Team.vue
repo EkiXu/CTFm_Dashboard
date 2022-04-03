@@ -221,11 +221,12 @@ export default {
 
     async deleteItem(item) {
       const index = this.teams.indexOf(item);
-      confirm("Are you sure you want to delete this Team?") &&
-      this.teams.splice(index, 1);
-      const res = await deleteTeamByIDAPI(item.id);
-      console.log("delete:",res);
-      this.$vToastify.success("Deleted Successfully");
+      if(confirm("Are you sure you want to delete this Team?")){
+        this.teams.splice(index, 1);
+        const res = await deleteTeamByIDAPI(item.id);
+        console.log("delete:",res);
+        this.$vToastify.success("Deleted Successfully");
+      }
     },
 
     close() {

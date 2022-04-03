@@ -423,9 +423,11 @@ export default {
 
     async deleteItem (item) {
       const index = this.challenges.indexOf(item)
-      confirm('Are you sure you want to delete this Challenge?') && this.challenges.splice(index, 1)
-      const res = await deleteChallengeByIDAPI(item.id)
-      this.$vToastify.success('Deleted Successfully')
+      if(confirm('Are you sure you want to delete this Challenge?')){
+        this.challenges.splice(index, 1)
+        const res = await deleteChallengeByIDAPI(item.id)
+        this.$vToastify.success('Deleted Successfully')
+      }
     },
 
     close () {

@@ -209,9 +209,11 @@ export default {
 
     async deleteItem (item) {
       const index = this.containers.indexOf(item)
-      confirm('Are you sure you want to delete this Container?') && this.containers.splice(index, 1)
-      const res = await deleteContainerByIDAPI(item.id)
-      this.$vToastify.success('Deleted Successfully')
+      if(confirm('Are you sure you want to delete this Container?')){
+        this.containers.splice(index, 1)
+        const res = await deleteContainerByIDAPI(item.id)
+        this.$vToastify.success('Deleted Successfully')
+      }
     },
 
     close () {

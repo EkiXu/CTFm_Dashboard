@@ -298,9 +298,11 @@ export default {
 
     async deleteItem (item) {
       const index = this.users.indexOf(item)
-      confirm('Are you sure you want to delete this User?') && this.users.splice(index, 1)
-      const res = await deleteUserByIDAPI(item.id)
-      this.$vToastify.success('Deleted Successfully')
+      if(confirm('Are you sure you want to delete this User?') ){
+        this.users.splice(index, 1)
+        const res = await deleteUserByIDAPI(item.id)
+        this.$vToastify.success('Deleted Successfully')
+      }
     },
 
     close () {

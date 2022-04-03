@@ -216,9 +216,11 @@ export default {
 
     async deleteItem (item) {
       const index = this.notifications.indexOf(item)
-      confirm('Are you sure you want to delete this Notification?') && this.notifications.splice(index, 1)
-      const res = await deleteNotificationByIDAPI(item.id)
-      this.$vToastify.success('Deleted Successfully')
+      if(confirm('Are you sure you want to delete this Notification?')){
+        this.notifications.splice(index, 1)
+        const res = await deleteNotificationByIDAPI(item.id)
+        this.$vToastify.success('Deleted Successfully')
+      }
     },
 
     close () {
