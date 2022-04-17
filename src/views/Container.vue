@@ -199,6 +199,7 @@ export default {
 
   async created () {
     this.initialize()
+    this.is_loading = false
   },
 
   methods: {
