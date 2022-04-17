@@ -23,6 +23,8 @@
             sort-by="id"
             class="elevation-1"
             style="box-shadow:none !important"
+            :loading="is_loading"
+            loading-text="Loading... Please wait"
           >
             <template v-slot:top>
               <v-toolbar flat>
@@ -99,7 +101,7 @@
                           >
                             <v-text-field
                               v-model="editedChallenge.flag"
-                              :rules="rules.flagRules"
+                              placeholder="Empty for dynamic flag"
                               label="Flag"
                             />
                           </v-col>
@@ -300,6 +302,7 @@ export default {
   },
   data: () => ({
     dialog: false,
+    is_loading:true,
     headers: [
       {
         text: 'ID',
@@ -384,9 +387,9 @@ export default {
         ],
         categoryRules: [v => !!v || 'Category is required'],
         contentnRules: [v => !!v || 'Content is required'],
-        flagRules: [v => !!v || 'Flag is required',
+        //flagRules: [v => !!v || 'Flag is required',
         //v=> /^flag{.*}$/.test(v) || 'Flag must be valid'
-        ]
+        //]
       }
   }),
 
@@ -404,6 +407,7 @@ export default {
 
   async created () {
     this.initialize()
+    this.is_loading = false
   },
 
   methods: {

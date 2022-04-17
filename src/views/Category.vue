@@ -23,6 +23,8 @@
             sort-by="id"
             class="elevation-1"
             style="box-shadow:none !important"
+            :loading="is_loading"
+            loading-text="Loading... Please wait"
           >
             <template v-slot:top>
               <v-toolbar flat>
@@ -161,6 +163,7 @@ export default {
   },
   data: () => ({
     dialog: false,
+    is_loading:true,
     headers: [
       {
         text: 'ID',
@@ -218,6 +221,7 @@ export default {
 
   async created () {
     this.initialize()
+    this.is_loading = false
   },
 
   methods: {
