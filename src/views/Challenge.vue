@@ -23,6 +23,8 @@
             sort-by="id"
             class="elevation-1"
             style="box-shadow:none !important"
+            :loading="is_loading"
+            loading-text="Loading... Please wait"
           >
             <template v-slot:top>
               <v-toolbar flat>
@@ -99,7 +101,7 @@
                           >
                             <v-text-field
                               v-model="editedChallenge.flag"
-                              :rules="rules.flagRules"
+                              placeholder="Empty for dynamic flag"
                               label="Flag"
                             />
                           </v-col>
@@ -156,7 +158,7 @@
                           >
                             <v-select
                               :items="types"
-                              v-model="editedChallenge.have_dynamic_container"
+                              v-model="editedChallenge.has_dynamic_container"
                               item-text="name"
                               item-value="value"
                               label="Type"
@@ -172,7 +174,7 @@
                               label="Attachment"
                             />
                           </v-col>
-                          <template v-if="editedChallenge.have_dynamic_container" >
+                          <template v-if="editedChallenge.has_dynamic_container" >
                             <v-col
                               cols="12"
                               sm="6"
@@ -199,7 +201,7 @@
                               sm="3"
                              >
                               <v-text-field
-                                v-model="editedChallenge.port"
+                                v-model="editedChallenge.redirect_port"
                                 label="Port"
                                 :rules="rules.portRules"
                               />
@@ -300,6 +302,7 @@ export default {
   },
   data: () => ({
     dialog: false,
+    is_loading:true,
     headers: [
       {
         text: 'ID',
@@ -334,6 +337,8 @@ export default {
       is_hidden: true,
       have_dynamic_container:false,
       attachment_url:'',
+      memory_limit:"128m",
+      cpu_limit:0.5,
     },
     defaultChallenge: {
       id:0,
@@ -346,7 +351,7 @@ export default {
       minimum_points:0,
       decay:0,
       is_hidden: true,
-      have_dynamic_container:false,
+      has_dynamic_container:false,
       attachment_url:'',
     },
     categories:[],
@@ -362,13 +367,13 @@ export default {
     ],
     protocols:[
       {
-        name:"HTTP",
-        value:'http'
+        name:"TCP",
+        value:'1'
       },
       {
-        name:"TCP",
-        value:'tcp'
-      }
+        name:"HTTP",
+        value:'2'
+      },
     ],
     rules: {
         nameRules: [
@@ -382,9 +387,9 @@ export default {
         ],
         categoryRules: [v => !!v || 'Category is required'],
         contentnRules: [v => !!v || 'Content is required'],
-        flagRules: [v => !!v || 'Flag is required',
+        //flagRules: [v => !!v || 'Flag is required',
         //v=> /^flag{.*}$/.test(v) || 'Flag must be valid'
-        ]
+        //]
       }
   }),
 
@@ -402,6 +407,7 @@ export default {
 
   async created () {
     this.initialize()
+    this.is_loading = false
   },
 
   methods: {
@@ -421,9 +427,11 @@ export default {
 
     async deleteItem (item) {
       const index = this.challenges.indexOf(item)
-      confirm('Are you sure you want to delete this Challenge?') && this.challenges.splice(index, 1)
-      const res = await deleteChallengeByID(item.id)
-      this.$vToastify.success('Deleted Successfully')
+      if(confirm('Are you sure you want to delete this Challenge?')){
+        this.challenges.splice(index, 1)
+        const res = await deleteChallengeByIDAPI(item.id)
+        this.$vToastify.success('Deleted Successfully')
+      }
     },
 
     close () {

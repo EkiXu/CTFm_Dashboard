@@ -77,11 +77,19 @@ const routes = [
     }
   },
   {
-    path: '/frp',
-    component: () => import('@/views/Frp.vue'),
-    name: 'frp',
+    path: '/container',
+    component: () => import('@/views/Container.vue'),
+    name: 'container',
     meta: {
-      title: 'Frp',
+      title: 'Container',
+    }
+  },
+  {
+    path: '/whale',
+    component: () => import('@/views/Whale.vue'),
+    name: 'whale',
+    meta: {
+      title: 'Whale',
     }
   },
   {

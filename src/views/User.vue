@@ -23,6 +23,8 @@
             sort-by="id"
             class="elevation-1"
             style="box-shadow:none !important"
+            :loading="is_loading"
+            loading-text="Loading... Please wait"
           >
             <template v-slot:top>
               <v-toolbar flat>
@@ -202,6 +204,7 @@ export default {
   },
   data: () => ({
     dialog: false,
+    is_loading:true,
     headers: [
       {
         text: 'ID',
@@ -281,6 +284,7 @@ export default {
 
   async created () {
     this.initialize()
+    this.is_loading = false
   },
 
   methods: {
@@ -298,9 +302,11 @@ export default {
 
     async deleteItem (item) {
       const index = this.users.indexOf(item)
-      confirm('Are you sure you want to delete this User?') && this.users.splice(index, 1)
-      const res = await deleteUserByIDAPI(item.id)
-      this.$vToastify.success('Deleted Successfully')
+      if(confirm('Are you sure you want to delete this User?') ){
+        this.users.splice(index, 1)
+        const res = await deleteUserByIDAPI(item.id)
+        this.$vToastify.success('Deleted Successfully')
+      }
     },
 
     close () {

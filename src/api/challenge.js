@@ -30,3 +30,10 @@ export const updateChallengeByIDAPI = (id,data) => {
     data:data
   })
 }
+
+export const deleteChallengeByIDAPI = (id) => {
+  return service({
+    url: '/admin/challenge/'+id+'/',
+    method: 'delete',
+  })
+}

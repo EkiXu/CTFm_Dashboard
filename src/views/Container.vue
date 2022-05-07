@@ -13,27 +13,27 @@
         <BaseCard color="#03a9be">
           <template v-slot:heading>
             <div class="display-2 font-weight-light">
-              Edit Notification
+              Edit Container
             </div>
           </template>
 
           <v-data-table
             :headers="headers"
-            :items="notifications"
+            :items="containers"
             sort-by="id"
             class="elevation-1"
             style="box-shadow:none !important"
           >
             <template v-slot:top>
               <v-toolbar flat>
-                <v-toolbar-title>Notification</v-toolbar-title>
+                <v-toolbar-title>Container</v-toolbar-title>
                 <v-divider
                   class="mx-4"
                   inset
                   vertical
                 />
                 <v-spacer />
-                <v-dialog
+                <!-- <v-dialog
                   v-model="dialog"
                   hide-overlay
                   persistent
@@ -46,12 +46,12 @@
                       v-bind="attrs"
                       v-on="on"
                     >
-                      New Notification
+                      New Container
                     </v-btn>
                   </template>
                   <v-card>
                     <v-card-title>
-                      <span class="headline">New Notification</span>
+                      <span class="headline">New Container</span>
                     </v-card-title>
 
                     <v-card-text>
@@ -63,9 +63,9 @@
                             md="8"
                           >
                             <v-text-field
-                              v-model="editedNotification.title"
+                              v-model="editedContainer.title"
                               :rules="rules.nameRules"
-                              label="Notification Title"
+                              label="Container Title"
                             />
                           </v-col>
                           <v-col
@@ -75,10 +75,10 @@
                           >
                             <v-select
                               :items="types"
-                              v-model="editedNotification.type_icon"
+                              v-model="editedContainer.type_icon"
                               :rules="rules.categoryRules"
                               label="Type Icon"
-                              :prepend-icon="editedNotification.type_icon"
+                              :prepend-icon="editedContainer.type_icon"
                             />
                           </v-col>
                           <v-col
@@ -88,7 +88,7 @@
                               Content
                             </h2>
                             <Markdown
-                              v-model="editedNotification.content"
+                              v-model="editedContainer.content"
                               :height="260"
                             />
                           </v-col>
@@ -114,7 +114,7 @@
                       </v-btn>
                     </v-card-actions>
                   </v-card>
-                </v-dialog>
+                </v-dialog> -->
               </v-toolbar>
             </template>
             <template v-slot:item.type="{ item }">
@@ -148,7 +148,7 @@
 <script>
 import BaseCard from '@/components/BaseCard.vue'
 import Markdown from 'vue-meditor'
-import { addNotificationAPI,deleteNotificationByIDAPI,getNotificationListAPI } from '@/api/notification'
+import { addContainerAPI,deleteContainerByIDAPI,getContainerListAPI } from '@/api/container'
 export default {
   components: {
     BaseCard,
@@ -162,39 +162,32 @@ export default {
     ],
     headers: [
       {
-        text: 'ID',
+        text: 'UUID',
         align: 'start',
         sortable: true,
-        value: 'id'
+        value: 'uuid'
       },
       {
-        text: 'Type',
+        text: 'Challenge',
         sortable: false,
-        value: 'type'
+        value: 'challenge'
       },
-      { text: 'Title', value: 'title' },
+      { text: 'Port', value: 'port' },
       { text: 'Actions', value: 'actions', sortable: false }
     ],
-    notifications: [],
+    containers: [],
     editedIndex: -1,
-    editedNotification: {
-      id:0,
-      type_icon:'mdi-information',
-      title: '',
-      pub_date: '',
+    editedContainer: {
+      uuid:0,
+      challenge:0,
+      port: '',
     },
-    editedNotification: {
-      id:0,
-      type_icon:'mdi-information',
-      title: '',
-      pub_date: '',
-    },   
     rules: {
         titleRules: [
-          v => !!v || 'Notification title is required',
+          v => !!v || 'Container title is required',
         ],
         contentRules: [
-          v => !!v || 'Notification title is required',
+          v => !!v || 'Container title is required',
         ],
       }
   }),
@@ -206,19 +199,20 @@ export default {
 
   async created () {
     this.initialize()
+    this.is_loading = false
   },
 
   methods: {
     async initialize () {
-      const res = await getNotificationListAPI()
-      this.notifications = res.data
+      const res = await getContainerListAPI()
+      this.containers = res.data
     },
 
     async deleteItem (item) {
-      const index = this.notifications.indexOf(item)
-      if(confirm('Are you sure you want to delete this Notification?')){
-        this.notifications.splice(index, 1)
-        const res = await deleteNotificationByIDAPI(item.id)
+      const index = this.containers.indexOf(item)
+      if(confirm('Are you sure you want to delete this Container?')){
+        this.containers.splice(index, 1)
+        const res = await deleteContainerByIDAPI(item.id)
         this.$vToastify.success('Deleted Successfully')
       }
     },
@@ -226,17 +220,17 @@ export default {
     close () {
       this.dialog = false
       this.$nextTick(() => {
-        this.editedNotification = Object.assign({}, this.defaultNotification)
+        this.editedContainer = Object.assign({}, this.defaultContainer)
         this.editedIndex = -1
       })
     },
 
     async save () {
-      console.log(this.editedNotification)
-      const res = await addNotificationAPI(this.editedNotification)
+      console.log(this.editedContainer)
+      const res = await addContainerAPI(this.editedContainer)
       console.log(res)
-      this.editedNotification.id = res['data']['id']
-      this.notifications.push(this.editedNotification)
+      this.editedContainer.id = res['data']['id']
+      this.containers.push(this.editedContainer)
       this.close()
       this.$vToastify.success('Added Successfully')
     }
