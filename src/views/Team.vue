@@ -48,28 +48,6 @@
                               item-value="id"
                             ></v-select>
                           </v-col>
-                          <v-col cols="12">
-                            <!--<v-file-input
-                                accept="image/png, image/jpeg, image/bmp"
-                                prepend-icon="mdi-camera"
-                                label="Avatar"
-                            ></v-file-input>-->
-                            <v-text-field
-                              v-model="editedTeam.avatar_url"
-                              label="Team Avatar"
-                              prepend-icon="mdi-camera"
-                            />
-                          </v-col>
-
-                          <v-col cols="12">
-                            <h2 style="padding-bottom:10px">Description</h2>
-                            <v-textarea
-                              v-model="editedTeam.description"
-                              auto-grow
-                              clearable
-                              clear-icon="mdi-close-circle"
-                            />
-                          </v-col>
                         </v-row>
                       </v-container>
                     </v-card-text>
@@ -82,13 +60,6 @@
                   </v-card>
                 </v-dialog>
               </v-toolbar>
-            </template>
-           <template v-slot:item.avatar_url="{ item }">
-              <v-avatar>
-                <img
-                  :src="item.avatar_url"
-                >
-              </v-avatar>
             </template>
             <template v-slot:item.actions="{ item }">
               <v-icon
@@ -142,11 +113,6 @@ export default {
         value: "id"
       },
       {
-        text: "Avatar",
-        sortable: false,
-        value: "avatar_url"
-      },
-      {
         text: "Name",
         sortable: false,
         value: "name"
@@ -160,15 +126,11 @@ export default {
     editedTeam: {
       id: 0,
       name: "",
-      description: "",
-      avatar_url: "",
       leader:0,
     },
     defaultTeam: {
       id: 0,
       name: "",
-      description: "",
-      avatar_url: "",
       leader:0,
     },
     rules: {
